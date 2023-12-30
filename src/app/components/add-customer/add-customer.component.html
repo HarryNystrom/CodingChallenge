@@ -1,0 +1,67 @@
+<div>
+    <div class="submit-form">
+      <form
+        name="addForm"
+        #f="ngForm"
+        (ngSubmit)="f.form.valid && saveCustomer()"
+        novalidate
+        >
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            required
+            [(ngModel)]="customer.firstName"
+            name="firstName"
+            #firstName="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }"
+          />
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
+            <div *ngIf="firstName.errors?.['required']" style="color:red;">First Name is required.</div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            class="form-control"
+            id="lastName"
+            required
+            [(ngModel)]="customer.lastName"
+            name="lastName"
+            #lastName="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }"
+          />
+          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+            <div *ngIf="lastName.errors?.['required']" style="color:red;">Last Name is required.</div>
+          </div>
+        </div>
+ 
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            class="form-control"
+            id="email"
+            required
+            email
+            [(ngModel)]="customer.email"
+            name="email"
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+          />
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.['required']" style="color:red;">Email is required.</div>
+            <div *ngIf="email.errors?.['email']" style="color:red;">Email is invalid.</div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <button type="submit" (click)="saveCustomer()" class="btn btn-success mt-2">Submit</button>
+        </div>
+    </form>
+  <!--<div>
+    <button class="btn btn-success" (click)="newCustomer()">Add</button>
+  </div>-->
+  </div>
